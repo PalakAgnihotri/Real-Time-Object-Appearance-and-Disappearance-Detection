@@ -1,0 +1,74 @@
+1. Project Title
+Real-Time Detection of Missing and New Objects in Video Stream
+
+2. Overview
+The objective of this project was to build a real-time system that can:
+
+Detect when a new object appears in the scene.
+
+Detect when a previously present object is missing from the scene.
+
+The project uses YOLOv8 for object detection and a custom SORT-based tracker for maintaining object IDs over time.
+
+3. Tools and Technologies
+Python 3.10
+
+OpenCV
+
+Ultralytics YOLOv8
+
+FilterPy (Kalman Filters)
+
+SORT (Simple Online and Realtime Tracking)
+
+Docker (Dockerfile prepared)
+
+CPU-only processing (no GPU used)
+
+4. System Architecture
+Object Detection: YOLOv8 (Lightweight model: YOLOv8n)
+
+Object Tracking: Modified SORT tracker
+
+Logic for saving frames:
+
+One capture when a new object appears
+
+One capture when an object disappears
+
+Only one capture per object per event (no repetition)
+
+5. FPS Achieved
+FPS: 12 - 18 FPS on live webcam feed using CPU
+
+Real-time performance was achieved for basic scenes with limited objects.
+
+Performance could vary depending on lighting, object motion, and hardware.
+
+6. Hardware Configuration
+Component	Specification
+CPU	Intel Core i5 (12th Gen)
+RAM	16 GB
+7. Sample Output Frames
+Captured frames saved under output/ folder:
+
+scene_empty.jpg → Frame with no objects.
+
+object_0_appeared.jpg → Frame when first object appeared.
+
+object_0_missing.jpg → Frame when that object disappeared.
+
+
+8. Additional Techniques and Optimizations
+Bounding box area filtering to ignore small far-away objects.
+
+Saving images only once per object per event using object states.
+
+Custom logic to manage "appeared" and "missing" flags for each tracked object.
+
+Dockerfile prepared for easy containerization of the project.
+
+9. HOW TO RUN THE CODE
+
+####venv\Scripts\activate(#On Windows PowerShell or CMD For Activating virtual environment if needed)
+####python main.py(To run the project)
